@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Web Technology Assignment Report - Mayur Habib</title>
+<style>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+    background: #fff;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    page-break-after: always;
+    page-break-inside: avoid;
+    padding: 12mm 15mm 10mm 15mm;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    overflow: hidden;
+  }
+  .top-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 13px;
+    padding-bottom: 6px;
+  }
+  .inner-border {
+    border: 3px double #000000;
+    flex: 1;
+    padding: 22px 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .page-footer {
+    text-align: right;
+    font-size: 12.5px;
+    font-weight: bold;
+    padding-top: 5px;
+  }
+  h2.section-title {
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0 0 16px 0;
+  }
+  p {
+    text-align: justify;
+    margin: 0 0 14px 0;
+    line-height: 1.65;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Tables */
+  table.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px;
+    font-size: 12.5px;
+  }
+  table.report-table th, table.report-table td {
+    border: 1px solid #000;
+    padding: 7px 10px;
+    text-align: left;
+    vertical-align: middle;
+  }
+  table.report-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+
+  /* TOC Table */
+  table.toc-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 13.5px;
+  }
+  table.toc-table td {
+    padding: 7px 4px;
+    vertical-align: bottom;
+  }
+  .dots {
+    border-bottom: 1px dotted #000;
+    flex-grow: 1;
+    margin: 0 5px;
+    height: 14px;
+  }
+
+  /* Lists */
+  ul.bullet-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0 16px 0;
+  }
+  ul.bullet-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 6px;
+    text-align: justify;
+  }
+  ul.bullet-list li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    font-size: 15px;
+  }
+
+  ul.arrow-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 6px 0 14px 0;
+  }
+  ul.arrow-list li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 5px;
+    text-align: justify;
+  }
+  ul.arrow-list li::before {
+    content: "➤";
+    position: absolute;
+    left: 4px;
+    font-size: 12px;
+  }
+
+  ul.check-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 6px 0 14px 0;
+  }
+  ul.check-list li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 5px;
+    text-align: justify;
+  }
+  ul.check-list li::before {
+    content: "✔";
+    position: absolute;
+    left: 4px;
+    font-size: 13px;
+  }
+
+  ul.diamond-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0 14px 0;
+  }
+  ul.diamond-list li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 7px;
+    text-align: justify;
+  }
+  ul.diamond-list li::before {
+    content: "◆";
+    position: absolute;
+    left: 4px;
+    font-size: 11px;
+  }
+
+  ul.square-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 6px 0 10px 0;
+  }
+  ul.square-list li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 6px;
+    text-align: justify;
+  }
+  ul.square-list li::before {
+    content: "■";
+    position: absolute;
+    left: 4px;
+    font-size: 11px;
+  }
+
+  ul.nested-circle-list {
+    list-style: none;
+    padding-left: 24px;
+    margin: 4px 0 10px 0;
+  }
+  ul.nested-circle-list li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 4px;
+  }
+  ul.nested-circle-list li::before {
+    content: "○";
+    position: absolute;
+    left: 0;
+    font-size: 11px;
+  }
+
+  /* Screenshot Images */
+  .screenshot-container {
+    text-align: center;
+    margin: 8px auto 6px;
+    width: 96%;
+  }
+  .screenshot-container img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    object-position: top;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .caption {
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: DECLARATION -->
+<div class="page">
+  <div class="top-header">
+    <span>Web Technology Assignment</span>
+    <span>JCET, Hubballi</span>
+  </div>
+  <div class="inner-border">
+    <h2 class="section-title">DECLARATION:</h2>
+    <p>
+      I hereby declare that the project entitled <strong>"Design and Development of a Personal Website with Resume and Bio-data"</strong> has been developed by me as part of my academic learning and practical experience in the field of web development.
+    </p>
+    <p>
+      I further declare that this project has been designed and implemented using HTML5, CSS3 and JavaScript to create a multi-page personal website consisting of Home, Resume and Bio-data sections. The project demonstrates the practical application of front-end web development concepts, including webpage structuring, styling, responsive design, navigation, interactive elements and basic website functionality.
+    </p>
+    <p>
+      I also declare that Visual Studio Code has been used as the development environment, Live Server has been utilized for local testing, and GitHub has been used for source code management. The completed website has been deployed using Netlify and GitHub Pages to make it accessible online through a public URL.
+    </p>
+    <p>
+      The information and content presented in this project report are true to the best of my knowledge and understanding. I confirm that the project has been completed as part of my academic activities and that the work presented in this report reflects my learning, implementation and efforts during the project development process.
+    </p>
+    <p>
+      I understand that the project and its documentation are being submitted for academic evaluation, and I take responsibility for the accuracy and authenticity of the information provided.
+    </p>
+    
+    <div style="margin-top: auto; padding-top: 30px; align-self: flex-end; width: 310px; font-size: 13.5px; line-height: 1.8;">
+      <p style="margin: 0;"><strong>Name:</strong> Mayur Habib</p>
+      <p style="margin: 0;"><strong>USN:</strong> 2JH24CS122</p>
+      <p style="margin: 0;"><strong>Date:</strong> 27/11/2026</p>
+      <p style="margin: 0;"><strong>Signature:</strong> ___________________</p>
+    </div>
+  </div>
+  <div class="page-footer">I</div>
+</div>
+
+<!-- PAGE 2: ACKNOWLEDGEMENT -->
+<div class="page">
+  <div class="top-header">
+    <span>Web Technology Assignment</span>
+    <span>JCET, Hubballi</span>
+  </div>
+  <div class="inner-border">
+    <h2 class="section-title">ACKNOWLEDGEMENT:</h2>
+    <p>
+      I would like to express my sincere gratitude to my college and the Department of Computer Science and Engineering for providing me with the opportunity and necessary facilities to undertake and complete this project entitled <strong>"Design and Development of a Personal Website with Resume and Bio-data"</strong> as part of my academic learning.
+    </p>
+    <p>
+      I am deeply thankful to the management and teaching faculty of the institution for creating a supportive learning environment and encouraging students to gain practical knowledge through technical projects. Their guidance and academic support have helped me understand the concepts involved in web development and apply them during the implementation of this project.
+    </p>
+    <p>
+      I would like to extend my heartfelt thanks to my project guide <strong>Prof. Shilpa B Hosagoudra</strong> and faculty members for their valuable suggestions, continuous encouragement and guidance throughout the development process. Their feedback and recommendations helped me improve the design, functionality and overall presentation of the website.
+    </p>
+    <p>
+      I am also grateful to the Department of Computer Science and Engineering for providing access to the necessary resources and learning opportunities required to explore technologies such as HTML5, CSS3 and JavaScript. This project has helped me strengthen my understanding of front-end development, responsive webpage design, website testing and deployment using Netlify and GitHub.
+    </p>
+    <p>
+      I would also like to thank my friends and classmates for their helpful suggestions, discussions and assistance during the planning and development stages of the project. Their encouragement and feedback contributed to improving the overall quality of the work.
+    </p>
+    <p>
+      Finally, I express my sincere gratitude to my parents and everyone who directly or indirectly supported and motivated me throughout the completion of this project. Their encouragement and support played an important role in successfully completing this academic work.
+    </p>
+  </div>
+  <div class="page-footer">II</div>
+</div>
+
+<!-- PAGE 3: ABSTRACT -->
+<div class="page">
+  <div class="top-header">
+    <span>Web Technology Assignment</span>
+    <span>JCET, Hubballi</span>
+  </div>
+  <div class="inner-border">
+    <h2 class="section-title">ABSTRACT:</h2>
+    <p>
+      The Personal Website entitled <strong>"Design and Development of a Personal Website with Resume and Bio-data"</strong> is a multi-page web application developed using HTML5, CSS3 and JavaScript to present an individual's personal, educational and professional information in a well-organized, attractive and easily accessible manner. The primary objective of this project is to create a professional online platform that provides visitors, recruiters and other interested individuals with information about the person's background, technical knowledge, educational qualifications, projects, achievements and career interests.
+    </p>
+    <p>
+      The website consists of three main webpages: Home, Resume and Bio-data. The Home page serves as the main landing page and provides a brief personal introduction along with a profile photograph, academic quick facts and navigation links to other sections. The Resume page presents educational qualifications, technical skills, programming languages and web technologies, projects, achievements, hobbies and other professional details in a structured format. The Bio-data page provides personal information, contact details, languages known, hobbies, declaration and signature details in an organized manner.
+    </p>
+    <p>
+      The website follows a modern Navy–Blue–Teal colour theme with both Light and Dark mode support, which provides a clean, attractive and consistent visual appearance across all webpages. HTML5 is used to develop the basic structure and content, while CSS3 is responsible for page layouts, styling, responsive design, colour combinations, hover effects and theme variables. JavaScript is implemented to provide interactive theme toggling functionality, persist user preferences and enhance the overall user experience.
+    </p>
+    <p>
+      Visual Studio Code is used as the development environment, and Live Server is used for local testing and verification. GitHub is utilized for source code management and version control, while Netlify and GitHub Pages are used to deploy and host the website online, making it accessible through a public URL.
+    </p>
+    <p>
+      This project provides practical exposure to front-end web development and helps in understanding webpage structuring, responsive user interface design, interactive functionality, website testing, source code management and web hosting. Overall, the Personal Website serves as a digital representation of an individual's profile and provides a simple and effective way to showcase personal and professional information.
+    </p>
+  </div>
+  <div class="page-footer">III</div>
+</div>
+
+<!-- PAGE 4: TABLE OF CONTENTS -->
+<div class="page">
+  <div class="top-header">
+    <span>Web Technology Assignment</span>
+    <span>JCET, Hubballi</span>
+  </div>
+  <div class="inner-border">
+    <h2 class="section-title" style="text-align: center; text-decoration: underline; margin-bottom: 25px;">TABLE OF CONTENTS</h2>
+    
+    <table class="toc-table">
+      <thead>
+        <tr style="font-weight: bold;">
+          <td style="width: 14%;">Sl.No.</td>
+          <td style="width: 72%;">Topic</td>
+          <td style="width: 14%; text-align: right;">Page No.</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Introduction ....................................................................................................</td><td style="text-align: right;">1</td></tr>
+        <tr><td>2</td><td>Objectives .......................................................................................................</td><td style="text-align: right;">1</td></tr>
+        <tr><td>3</td><td>Technologies Used .........................................................................................</td><td style="text-align: right;">1</td></tr>
+        <tr><td>4</td><td>Website structure and Modules ...................................................................</td><td style="text-align: right;">2</td></tr>
+        <tr><td>4.1</td><td style="padding-left: 20px;">Home Page ................................................................................................</td><td style="text-align: right;">2</td></tr>
+        <tr><td>4.2</td><td style="padding-left: 20px;">Resume Page .............................................................................................</td><td style="text-align: right;">2</td></tr>
+        <tr><td>4.3</td><td style="padding-left: 20px;">Bio-data Page ............................................................................................</td><td style="text-align: right;">2</td></tr>
+        <tr><td>5</td><td>Design and Implementation ..........................................................................</td><td style="text-align: right;">3</td></tr>
+        <tr><td>6</td><td>Website Deployment ....................................................................................</td><td style="text-align: right;">3</td></tr>
+        <tr><td>7</td><td>Output .............................................................................................................</td><td style="text-align: right;">4</td></tr>
+        <tr><td>8</td><td>Website Screenshots .....................................................................................</td><td style="text-align: right;">4</td></tr>
+        <tr><td>9</td><td>Advantages ....................................................................................................</td><td style="text-align: right;">6</td></tr>
+        <tr><td></td><td>Conclusion ......................................................................................................</td><td style="text-align: right;">6</td></tr>
+        <tr><td></td><td>Future Enhancements ..................................................................................</td><td style="text-align: right;">6</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="page-footer">IV</div>
+</div>
+
+<!-- PAGE 5 (1 | Page) -->
+<div class="page">
+  <div class="top-header">
+    <span>Web Technology Assignment</span>
+    <span>JCET, Hubballi</span>
+  </div>
+  <div class="inner-border">
+    <h2 class="section-title">1. INTRODUCTION:</h2>
+    <p>
+      A Personal Website is a web-based platform developed to present an individual's personal information, educational qualifications, technical skills, projects and achievements in a structured manner.
+    </p>
+    <p>
+      The main purpose of this project is to create a simple, attractive and user-friendly website that acts as an online profile. It allows visitors, recruiters and other interested people to access the individual's information through different sections of the website.
+    </p>
+    <p>
+      The website is developed using HTML5, CSS3 and JavaScript. It consists of separate pages for Home, Resume and Bio-data, with a consistent Navy–Blue–Teal colour theme supporting both Light and Dark modes. The website is hosted using Netlify and GitHub Pages, making it accessible through a public URL.
+    </p>
+
+    <h2 class="section-title" style="margin-top: 15px;">2. OBJECTIVES:</h2>
+    <ul class="bullet-list">
+      <li>To develop a personal website using HTML5, CSS3 and JavaScript.</li>
+      <li>To present personal and educational information systematically.</li>
+      <li>To display technical skills, projects and achievements.</li>
+      <li>To create separate webpages for Resume and Bio-data.</li>
+      <li>To implement easy navigation and theme switching across different webpages.</li>
+      <li>To deploy the website online using Netlify and GitHub Pages.</li>
+    </ul>
+
+    <h2 class="section-title" style="margin-top: 15px;">3. TECHNOLOGIES USED:</h2>
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th style="width: 32%;">Technology</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>HTML5</strong></td>
+          <td>Creating the structure and content of webpages</td>
+        </tr>
+        <tr>
+          <td><strong>CSS3</strong></td>
+          <td>Designing layouts, colours, fonts and themes</td>
+        </tr>
+        <tr>
+          <td><strong>JavaScript</strong></td>
+          <td>Adding interactive light/dark theme toggle</td>
+        </tr>
+        <tr>
+          <td><strong>Visual Studio Code</strong></td>
+          <td>Writing and editing source code</td>
+        </tr>
+        <tr>
+          <td><strong>Live Server</strong></td>
+          <td>Running and testing the website locally</td>
+        </tr>
+        <tr>
+          <td><strong>GitHub</strong></td>
+          <td>Storing and managing project source files</td>
+        </tr>
+        <tr>
+          <td><strong>Netlify / GitHub Pages</strong></td>
+          <td>Hosting and deploying the website</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="page-footer">1 | P a g e</div>
+</div>
+
+<!-- PAGE 6 (2 | Page) -->
+<div class="page">
+  <div class="top-header">
+    <span>Web Technology Assignment</span>
+    <span>JCET, Hubballi</span>
+  </div>
+  <div class="inner-border">
+    <h2 class="section-title">4. WEBSITE STRUCTURE AND MODULES:</h2>
+    
+    <h3 style="font-size: 14px; margin: 10px 0 6px 0;">4.1 HOME PAGE:</h3>
+    <p>
+      The Home page acts as the main landing page of the website. It provides a brief introduction and allows visitors to navigate to other sections.
+    </p>
+    <ul class="arrow-list">
+      <li>Personal profile photograph.</li>
+      <li>Name and professional introduction.</li>
+      <li>Short personal description and academic quick facts.</li>
+      <li>Navigation links to Resume and Bio-data.</li>
+      <li>Light and Dark mode theme toggle button.</li>
+      <li>Interactive buttons and visual elements.</li>
+    </ul>
+
+    <h3 style="font-size: 14px; margin: 14px 0 6px 0;">4.2 RESUME PAGE:</h3>
+    <p>
+      The Resume page presents the individual's educational and professional profile in a structured format.
+    </p>
+    <ul class="arrow-list">
+      <li>Personal Information and Contact Details.</li>
+      <li>Career Objective.</li>
+      <li>Educational Qualifications (B.E., PUC, SSLC).</li>
+      <li>Technical Skills and Programming Languages.</li>
+      <li>Projects (VSMS – Vehicle Service Management System).</li>
+      <li>Achievements (1st Prize in UI/UX Design at HackFusion AGMR &amp; State Level 400m Running).</li>
+      <li>Hobbies (Sports, Reading books).</li>
+    </ul>
+
+    <h3 style="font-size: 14px; margin: 14px 0 6px 0;">4.3 BIO-DATA PAGE:</h3>
+    <p>
+      The Bio-data page displays personal and academic information in an organized format.
+    </p>
+    <ul class="arrow-list">
+      <li>Personal Information.</li>
+      <li>Contact Details.</li>
+      <li>Languages Known (English, Marathi, Kannada, Hindi).</li>
+      <li>Hobbies (Sports, Reading books).</li>
+      <li>Declaration.</li>
+      <li>Place and Signature section.</li>
+    </ul>
+  </div>
+  <div class="page-footer">2 | P a g e</div>
+</div>
+
+<!-- PAGE 7 (3 | Page) -->
+<div class="page">
+  <div class="top-header">
+    <span>Web Technology Assignment</span>
+    <span>JCET, Hubballi</span>
+  </div>
+  <div class="inner-border">
+    <h2 class="section-title">5. DESIGN AND IMPLEMENTATION:</h2>
+    <p>
+      The website is designed using a modern Navy–Blue–Teal colour combination with Light and Dark theme support to provide a clean and professional appearance.
+    </p>
+    <p style="margin-bottom: 6px;">The three main colours are used as follows:</p>
+    <ul class="diamond-list">
+      <li><strong>Deep Navy:</strong> Provides strong visual contrast for headings, primary buttons, table headers and footer.</li>
+      <li><strong>Royal Blue:</strong> Highlights hyperlinks, active navigation states and professional role subtitles.</li>
+      <li><strong>Teal &amp; Slate Surface:</strong> Adds accent emphasis to badges and borders while ensuring crisp readability for text content.</li>
+    </ul>
+
+    <p>
+      HTML5 is used to create the structure of the webpages. CSS3 is used for styling, responsive layouts, hover effects, CSS custom properties and consistent page design across Light and Dark modes.
+    </p>
+    <p>
+      JavaScript is used to implement interactive Light/Dark theme toggling and persist the user's selected theme across pages using localStorage.
+    </p>
+    <p>
+      Separate HTML files are maintained for each webpage, while common CSS and JavaScript files are used to maintain consistency and simplify website maintenance.
+    </p>
+
+    <h2 class="section-title" style="margin-top: 16px;">6. WEBSITE DEPLOYMENT:</h2>
+    <p>
+      The website is deployed using Netlify and GitHub Pages, free static website hosting and cloud deployment services.
+    </p>
+    <ul class="arrow-list" style="margin-bottom: 4px;">
+      <li>The deployment process involves:</li>
+    </ul>
+    <ul class="nested-circle-list">
+      <li>Creating a clean project repository on GitHub.</li>
+      <li>Uploading all HTML, CSS, JavaScript and image files.</li>
+      <li>Connecting the project repository to Netlify / GitHub Pages.</li>
+      <li>Choosing the main branch and root directory as the publishing source.</li>
+      <li>Saving the configuration and waiting for automated deployment.</li>
+      <li>Accessing the website through the generated public URL.</li>
+    </ul>
+
+    <div style="margin-top: 12px; font-size: 13px;">
+      <p style="margin-bottom: 4px;"><strong>GitHub Repository:</strong></p>
+      <p style="margin-bottom: 8px; color: #2463a6;"><a href="https://github.com/mayurhabib26-hub/resume" style="color: #2463a6; text-decoration: none;">https://github.com/mayurhabib26-hub/resume</a></p>
+      <p style="margin-bottom: 4px;"><strong>Published Website Link:</strong></p>
+      <p style="margin-bottom: 0; color: #2463a6;"><a href="https://mayurhabib26-hub.github.io/resume/" style="color: #2463a6; text-decoration: none;">https://mayurhabib26-hub.github.io/resume/</a></p>
+    </div>
+  </div>
+  <div class="page-footer">3 | P a g e</div>
+</div>
+
+<!-- PAGE 8 (4 | Page) -->
+<div class="page">
+  <div class="top-header">
+    <span>Web Technology Assignment</span>
+    <span>JCET, Hubballi</span>
+  </div>
+  <div class="inner-border">
+    <h2 class="section-title">7. OUTPUT:</h2>
+    <p style="margin-bottom: 6px;">The final application successfully provides:</p>
+    <ul class="check-list">
+      <li>A Home page with personal introduction, quick facts and profile photograph.</li>
+      <li>A Resume page containing educational and professional details.</li>
+      <li>A Bio-data page displaying personal information.</li>
+      <li>Easy navigation between all three webpages.</li>
+      <li>Consistent Navy–Blue–Teal styling with Light and Dark mode support.</li>
+      <li>Public accessibility through Netlify and GitHub Pages.</li>
+      <li>Responsive layout that adapts to different screen sizes and devices.</li>
+      <li>User-friendly interface with clean design and organized content.</li>
+      <li>Interactive Light/Dark theme toggle and navigation elements using JavaScript.</li>
+      <li>Successfully tested webpages using Live Server before deployment.</li>
+    </ul>
+
+    <h2 class="section-title" style="margin-top: 14px;">8. WEBSITE SCREENSHOTS:</h2>
+    <p style="font-size: 13px; margin-bottom: 10px;">
+      The following screenshots illustrate the final output of the developed Personal Website. They provide a visual representation of the Home, Resume and Bio-data pages, highlighting the website's layout, design, navigation and implemented functionalities.
+    </p>
+
+    <div class="screenshot-container">
+      <img src="report_assets/home_page.png" alt="Home Page Output">
+      <div class="caption">Figure 8.1: Home Page Output</div>
+    </div>
+  </div>
+  <div class="page-footer">4 | P a g e</div>
+</div>
+
+<!-- PAGE 9 (5 | Page) -->
+<div class="page">
+  <div class="top-header">
+    <span>Web Technology Assignment</span>
+    <span>JCET, Hubballi</span>
+  </div>
+  <div class="inner-border" style="justify-content: space-around;">
+    <div class="screenshot-container" style="margin-top: 0;">
+      <img src="report_assets/resume_page.png" alt="Resume Page Output" style="max-height: 310px;">
+      <div class="caption">Figure 8.2: Resume Page Output</div>
+    </div>
+
+    <div class="screenshot-container" style="margin-top: 10px;">
+      <img src="report_assets/biodata_page.png" alt="Bio-data Page Output" style="max-height: 310px;">
+      <div class="caption">Figure 8.3: Bio-data Page Output</div>
+    </div>
+  </div>
+  <div class="page-footer">5 | P a g e</div>
+</div>
+
+<!-- PAGE 10 (6 | Page) -->
+<div class="page">
+  <div class="top-header">
+    <span>Web Technology Assignment</span>
+    <span>JCET, Hubballi</span>
+  </div>
+  <div class="inner-border">
+    <h2 class="section-title">9. ADVANTAGES:</h2>
+    <ul class="diamond-list">
+      <li>Creates a professional online identity.</li>
+      <li>Makes personal and academic information easily accessible.</li>
+      <li>Organizes information into separate webpages.</li>
+      <li>Can be accessed through a web browser from different devices.</li>
+      <li>Provides a user-friendly interface with simple navigation.</li>
+      <li>Offers public access through Netlify without requiring a separate hosting server.</li>
+    </ul>
+
+    <h2 class="section-title" style="margin-top: 16px;">CONCLUSION:</h2>
+    <p>
+      The Personal Website was successfully designed and developed using HTML5, CSS3 and JavaScript. It provides an organized presentation of personal, educational and professional information through three separate webpages: Home, Resume and Bio-data.
+    </p>
+    <p>
+      The project provided practical experience in front-end development, responsive design, website testing, source code management using GitHub and deployment through Netlify.
+    </p>
+    <p>
+      Overall, the project strengthened web development skills and established a foundation for incorporating additional features and technologies in the future.
+    </p>
+
+    <h2 class="section-title" style="margin-top: 16px;">FUTURE ENHANCEMENTS:</h2>
+    <p style="margin-bottom: 6px;">
+      The website can be further enhanced by incorporating additional features and technologies, such as:
+    </p>
+    <ul class="square-list">
+      <li><strong>User Interaction:</strong> Add a contact form and social media links.</li>
+      <li><strong>Content Enhancement:</strong> Include more projects, achievements and certifications.</li>
+      <li><strong>Design Improvements:</strong> Introduce better animations, themes and responsive layouts.</li>
+      <li><strong>Backend Integration:</strong> Connect a database and implement dynamic content management.</li>
+      <li><strong>Performance and Security:</strong> Improve loading speed, visitor analytics and data security.</li>
+    </ul>
+    <p style="margin-top: 8px;">
+      These improvements can make the website more interactive, efficient and suitable as a professional online portfolio.
+    </p>
+  </div>
+  <div class="page-footer">6 | P a g e</div>
+</div>
+
+</body>
+</html>
